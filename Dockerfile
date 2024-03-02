@@ -1,4 +1,4 @@
-FROM hemanhp/djbase:5.0
+FROM hemanhp/djbase:4.2.7
 
 COPY ./requirements /requirements
 COPY ./src /src
