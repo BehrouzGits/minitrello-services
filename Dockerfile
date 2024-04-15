@@ -10,6 +10,8 @@ EXPOSE 8000
 
 RUN /py/bin/pip install -r /requirements/development.txt
 
+USER root
+
 RUN chmod -R +x /scripts && \
     mkdir -p /vol/web/static && \
     mkdir -p /vol/web/media && \
@@ -20,6 +22,6 @@ RUN chmod -R +x /scripts && \
 
 ENV PATH="/scripts:/py/bin:$PATH"
 
-# USER trello
+USER trello
 
-# CMD ["run.sh"]
+CMD ["run.sh"]
