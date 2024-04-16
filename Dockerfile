@@ -22,6 +22,6 @@ RUN chmod -R +x /scripts && \
 
 ENV PATH="/scripts:/py/bin:$PATH"
 
-USER trello
+# USER trello
 
 CMD ["run.sh"]
