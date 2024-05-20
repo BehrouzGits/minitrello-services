@@ -33,3 +33,26 @@ LOGGING = {
         }
     }
 }
+
+# settings.py
+import sentry_sdk
+
+sentry_sdk.init(
+    dsn="https://bf7dc41d61ccad19f11320103a6151ca@o4507284903755776.ingest.us.sentry.io/4507284909391872",
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    profiles_sample_rate=1.0,
+)
+
+
+def handler(t, i, s):
+    print("uncaught")
+
+sys.excepthook = handler
+
+
+

@@ -17,6 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+class UserException(Exception):
+    pass
+
+def trigger_error(request):
+    raise UserException("another error")
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('debug', trigger_error),
+    
 ]
