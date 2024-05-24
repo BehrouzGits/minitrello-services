@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'trello.apps.core',
+    'trello.apps.users',
 ]
 
 MIDDLEWARE = [

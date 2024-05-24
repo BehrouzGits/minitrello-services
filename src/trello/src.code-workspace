@@ -7,5 +7,7 @@
 			"path": "../../py/lib/python3.12/site-packages"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"python.languageServer": "Pylance"
+	}
 }

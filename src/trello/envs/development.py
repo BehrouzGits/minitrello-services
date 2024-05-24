@@ -55,4 +55,17 @@ def handler(t, i, s):
 sys.excepthook = handler
 
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'trello',
+        'USER': 'trello',
+        'PASSWORD': '123@456',
+        'HOST':'db',
+        'PORT':5432
+    }
+}
+
+
+
 

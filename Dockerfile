@@ -1,4 +1,4 @@
-FROM hemanhp/djbase:4.2.7
+FROM hemanhp/djbase:5.0
 
 COPY ./requirements /requirements
 COPY ./scripts /scripts
@@ -22,6 +22,6 @@ RUN chmod -R +x /scripts && \
 
 ENV PATH="/scripts:/py/bin:$PATH"
 
-# USER trello
-
 CMD ["run.sh"]
+
+# USER trello
