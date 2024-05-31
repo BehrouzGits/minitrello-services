@@ -13,3 +13,4 @@ celery==5.3.6
 redis==5.0.3
 django-treebeard==4.7.1
 django-guardian==2.4.0
+djangorestframework-simplejwt==5.3.1
