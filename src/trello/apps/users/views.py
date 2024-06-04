@@ -20,6 +20,15 @@ class OTPView(APIView):
                 print (e)
                 return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
-            return Response(status=status.HTTP_400_BAD_REQUEST, data = serializer.errors )
+            return Response(status=status.HTTP_400_BAD_REQUEST, data = serializer.errors)
     def post(self, request):
-        pass
+        serializer = serializers.verifyOtpRequestSerializer(data=request.data)
+        if serializer.is_valid():
+            data = serializer.validated_data
+            if OTPRequest.objects.is_valid(data['receiver'], data['request_id'], data['password']):
+                pass
+            else:
+                return Response(status=status.HTTP_401_UNAUTHORIZED)    
+
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data = serializer.errors)

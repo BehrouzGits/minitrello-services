@@ -11,7 +11,20 @@ from trello.apps.users.sender import send_otp
 class User(AbstractUser):
     pass
 
+class OtpRequestQuerySet(models.QuerySet):
+    def is_valid(self, receiver, request, password):
+        return self.filter(
+            receiver=receiver,
+            request_id=request,
+            password=password
+        ).exists()
+
+
 class OTPManager(models.Manager):
+
+    def get_queryset(self):
+        return OtpRequestQuerySet(self.model, self._db)
+    
     def generate(self, data):
         otp =self.model(channel=data['channel'], receiver=data['receiver'])
         otp.save(using=self._db)
