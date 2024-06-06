@@ -1,9 +1,10 @@
 from django.shortcuts import render
-
+from django.contrib.auth import get_user_model
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import OTPRequest
 from . import serializers
@@ -26,9 +27,28 @@ class OTPView(APIView):
         if serializer.is_valid():
             data = serializer.validated_data
             if OTPRequest.objects.is_valid(data['receiver'], data['request_id'], data['password']):
-                pass
+                return Response(self._handle_login(data))
             else:
                 return Response(status=status.HTTP_401_UNAUTHORIZED)    
 
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST, data = serializer.errors)
+
+    def _handle_login(self, otp):
+        User = get_user_model()
+        query = User.objects.filter(username=otp['receiver'])
+        if query.exists():
+            created = False
+            user = query.first()
+        else:
+            user = User.objects.create(username=otp['receiver'])
+            created=True
+
+        refresh = RefreshToken.for_user(user)
+
+        return serializers.ObtainTokenSerializer({
+            'refresh' : str(refresh),
+            'token' : str(refresh.access_token),
+            'created' : created
+        }).data
+        

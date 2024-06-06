@@ -38,7 +38,7 @@ LOGGING = {
 import sentry_sdk
 
 sentry_sdk.init(
-    dsn="https://bf7dc41d61ccad19f11320103a6151ca@o4507284903755776.ingest.us.sentry.io/4507284909391872",
+    dsn="https://9670333f9785dbb6b2eb2039bae383b6@o4507384418598912.ingest.us.sentry.io/4507384422465536",
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.
     traces_sample_rate=1.0,

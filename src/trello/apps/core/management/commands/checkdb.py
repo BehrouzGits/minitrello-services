@@ -3,7 +3,7 @@
 import time
 from typing import Any
 from django.core.management import BaseCommand
-from psycopg2 import OperationalError
+from psycopg import OperationalError
 from django.db.utils import OperationalError as DjError
 
 class Command(BaseCommand):

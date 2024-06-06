@@ -13,11 +13,11 @@ class RequestOTPResponseSerializer(serializers.ModelSerializer):
 
 class verifyOtpRequestSerializer(serializers.Serializer):
     request_id = serializers.UUIDField(allow_null=False)
-    password = serializers.CharField(max_lenght=4, allow_null=False)
-    receiver = serializers.CharField(max_lenght=64, allow_null=False)
+    password = serializers.CharField(max_length=4, allow_null=False)
+    receiver = serializers.CharField(max_length=64, allow_null=False)
 
 class ObtainTokenSerializer(serializers.Serializer):
-    token = serializers.CharField(max_lenght=128, allow_null=False)
-    refresh = serializers.CharField(max_lenght=128, allow_null=False)
+    token = serializers.CharField(max_length=128, allow_null=False)
+    refresh = serializers.CharField(max_length=128, allow_null=False)
     created = serializers.BooleanField()
     

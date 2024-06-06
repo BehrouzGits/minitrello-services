@@ -1,6 +1,10 @@
+
 import random
 import string
 import uuid
+from datetime import timedelta
+
+from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -13,18 +17,26 @@ class User(AbstractUser):
 
 class OtpRequestQuerySet(models.QuerySet):
     def is_valid(self, receiver, request, password):
+        current_time = timezone.now()
         return self.filter(
             receiver=receiver,
             request_id=request,
-            password=password
+            password=password,
+            created__lt=current_time,
+            created__gt=current_time-timedelta(seconds=120),
+
         ).exists()
 
 
 class OTPManager(models.Manager):
-
+    
     def get_queryset(self):
         return OtpRequestQuerySet(self.model, self._db)
     
+    def is_valid(self, receiver, request, password):
+        return self.get_queryset().is_valid(receiver, request, password)
+
+
     def generate(self, data):
         otp =self.model(channel=data['channel'], receiver=data['receiver'])
         otp.save(using=self._db)
